@@ -6,9 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "create": "mkdir folder",
-    "delete": "rm -rf folder"
+    "create": "mkdir build",
+    "delete": "rm -rf build"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
