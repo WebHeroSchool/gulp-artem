@@ -1,6 +1,7 @@
 const gulp = require("gulp");
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
 
 gulp.task("css", () => {
   return gulp.src("dev/css/*.css")
@@ -13,6 +14,7 @@ gulp.task("js", () => {
     .pipe(babel({
       presets: ['@babel/env']
     }))
+    .pipe(uglify())
     .pipe(gulp.dest("build/js"));
 });
 

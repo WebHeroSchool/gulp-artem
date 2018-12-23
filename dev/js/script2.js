@@ -1,1 +1,1 @@
-const someThingTwo = 'two';
+const someThingTwo = 'two'; // from second

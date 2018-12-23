@@ -1,1 +1,1 @@
-const someThingOne = 'one';
+const someThingOne = 'one'; // from first file
