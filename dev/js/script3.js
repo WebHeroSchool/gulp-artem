@@ -1,5 +1,5 @@
 const someThingThree = 'three';
 
-for (var i = 0; i < 12; i++) {
+for (var i = 0; i < 20; i++) {
     console.log(i);
 }
