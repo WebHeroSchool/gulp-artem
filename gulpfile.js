@@ -56,3 +56,6 @@ gulp.task('server', function () {
 
 gulp.task('css-watch', ['build-css'], () => browserSync.reload());
 gulp.task('js-watch', ['build-js'], () => browserSync.reload());
+
+gulp.task('prod', ['build']);
+gulp.task('dev', ['build', 'server']);
