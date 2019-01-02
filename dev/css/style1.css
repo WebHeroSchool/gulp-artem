@@ -43,3 +43,8 @@ body {
   size: 400px;
   margin: 0 auto;
 }
+
+/* preset env example */
+:root {
+  --mainColor: #12345678;
+}

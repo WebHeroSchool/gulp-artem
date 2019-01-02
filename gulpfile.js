@@ -13,6 +13,7 @@ const autoprefixer = require('autoprefixer');
 const nested = require('postcss-nested');
 const short = require('postcss-short');
 const assets = require('postcss-assets');
+const presetEnv = require('postcss-preset-env');
 
 const paths = {
   src: {
@@ -43,7 +44,8 @@ gulp.task("build-css", () => {
     short,
     assets({
       loadPaths: ['dev/images/']
-    })
+    }),
+    presetEnv
   ];
   return gulp.src([paths.src.css])
     .pipe(sourcemaps.init())
