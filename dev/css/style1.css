@@ -1,24 +1,33 @@
 body {
-    margin: 0 auto;
-    display: flex;
+  margin: 0 auto;
+  display: flex;
+  flex: 1;
 }
 
+/* autoprefixer example */
 ::placeholder {
-    color: black;
+  color: black;
 }
 
-
+/* nested example */
 .phone {
-    &_title {
-        width: 500px;
-        @media (max-width: 500px) {
-            width: auto;
-        }
-        body.is_dark & {
-            color: white;
-        }
+  &_title {
+    width: 500px;
+    @media (max-width: 500px) {
+      width: auto;
     }
-    img {
-        display: block;
+    body.is_dark & {
+      color: white;
     }
+  }
+  img {
+    display: block;
+  }
 }
+
+/* short example */
+.canvas {
+  color: #abccfc #212231;
+  position: absolute * auto;
+}
+

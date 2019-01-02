@@ -11,6 +11,7 @@ const clean = require('gulp-clean');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const nested = require('postcss-nested');
+const short = require('postcss-short');
 
 const paths = {
   src: {
@@ -37,7 +38,8 @@ gulp.task("build-css", () => {
     autoprefixer({
       browsers: ['last 2 version']
     }),
-    nested()
+    nested,
+    short
   ];
   return gulp.src([paths.src.css])
     .pipe(sourcemaps.init())
