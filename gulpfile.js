@@ -8,6 +8,7 @@ const browserSync = require('browser-sync').create();
 const gulpif = require('gulp-if');
 const env = require('gulp-env');
 const clean = require('gulp-clean');
+const postcss = require('gulp-postcss');
 
 const paths = {
   src: {
@@ -30,8 +31,10 @@ env({
 });
 
 gulp.task("build-css", () => {
+  const plugins = [];
   return gulp.src([paths.src.css])
     .pipe(sourcemaps.init())
+    .pipe(postcss(plugins))
     .pipe(concat(paths.buildNames.css))
     .pipe(gulpif(process.env.NODE_ENV === 'production', cssnano()))
     .pipe(sourcemaps.write())
