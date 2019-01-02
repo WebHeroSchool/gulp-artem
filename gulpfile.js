@@ -12,6 +12,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const nested = require('postcss-nested');
 const short = require('postcss-short');
+const assets = require('postcss-assets');
 
 const paths = {
   src: {
@@ -39,7 +40,10 @@ gulp.task("build-css", () => {
       browsers: ['last 2 version']
     }),
     nested,
-    short
+    short,
+    assets({
+      loadPaths: ['dev/images/']
+    })
   ];
   return gulp.src([paths.src.css])
     .pipe(sourcemaps.init())

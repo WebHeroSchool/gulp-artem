@@ -25,6 +25,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
+    "postcss-assets": "^5.0.0",
     "postcss-nested": "^4.1.1",
     "postcss-short": "^5.0.0"
   }
