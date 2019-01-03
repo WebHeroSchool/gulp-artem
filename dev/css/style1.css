@@ -1,3 +1,50 @@
 body {
-    margin: 0 auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+/* autoprefixer example */
+::placeholder {
+  color: black;
+}
+
+/* nested example */
+.phone {
+  &_title {
+    width: 500px;
+    @media (max-width: 500px) {
+      width: auto;
+    }
+    body.is_dark & {
+      color: white;
+    }
+  }
+  img {
+    display: block;
+  }
+}
+
+/* short example */
+.canvas {
+  color: #abccfc #212231;
+  position: absolute * auto;
+}
+
+/* assets example */
+.npm-image {
+  background-image: resolve('npm.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-top: 20px;
+  size: 400px;
+  margin: 0 auto;
+}
+
+/* preset env example */
+:root {
+  --mainColor: #12345678;
 }
