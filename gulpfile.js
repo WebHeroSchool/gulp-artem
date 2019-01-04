@@ -17,6 +17,7 @@ const presetEnv = require('postcss-preset-env');
 const glob = require('glob');
 const rename = require('gulp-rename');
 const handlebars = require('gulp-compile-handlebars');
+const templateData = require('./dev/data.json')
 
 const paths = {
   src: {
@@ -49,7 +50,7 @@ gulp.task('compile', () => {
         batch: files.map(item => item.slice(0, item.lastIndexOf('/')))
       }
       return gulp.src(`${paths.src.dir}/index.hbs`)
-        .pipe(handlebars({}, options))
+        .pipe(handlebars(templateData, options))
         .pipe(rename('index.html'))
         .pipe(gulp.dest(paths.build.dir))
     }
