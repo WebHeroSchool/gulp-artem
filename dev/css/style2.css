@@ -1,3 +1,11 @@
 body {
     background-color: goldenrod;
 }
+
+.artist {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 100px;
+    height: 200px;
+}
