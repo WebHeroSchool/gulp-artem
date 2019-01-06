@@ -17,7 +17,9 @@ const presetEnv = require('postcss-preset-env');
 const glob = require('glob');
 const rename = require('gulp-rename');
 const handlebars = require('gulp-compile-handlebars');
-const templateData = require('./dev/data.json')
+const eslint = require('gulp-eslint');
+const templateData = require('./dev/data.json');
+const rulesJS = require('./.eslintrc.json');
 
 const paths = {
   src: {
@@ -34,7 +36,10 @@ const paths = {
     css: 'styles.min.css',
     js: 'index.min.js'
   },
-  templates: 'dev/templates/**/*.hbs'
+  templates: 'dev/templates/**/*.hbs',
+  lint: {
+    scripts: ['**/*.js', '!node_modules/**/*', '!build/**/*']
+  }
 };
 
 env({
@@ -115,6 +120,12 @@ gulp.task('server', function () {
   });
   gulp.watch(paths.src.css, ['css-watch']);
   gulp.watch(paths.src.js, ['js-watch']);
+});
+
+gulp.task('eslint', () => {
+  gulp.src(paths.lint.scripts)
+    .pipe(eslint(rulesJS))
+    .pipe(eslint.format());
 });
 
 gulp.task('css-watch', ['build-css'], () => browserSync.reload());
