@@ -47,7 +47,17 @@ gulp.task('compile', () => {
     if (!err) {
       const options = {
         ignorePartials: true,
-        batch: files.map(item => item.slice(0, item.lastIndexOf('/')))
+        batch: files.map(item => item.slice(0, item.lastIndexOf('/'))),
+        helpers: {
+          // helper for capitalize every word in sentense
+          capitalizeEveryWord: str => {
+            return str.split(' ')
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' ');
+          },
+          // helper return true if age > 18, and false if age < 18
+          isOld: age => age > 18
+        }
       }
       return gulp.src(`${paths.src.dir}/index.hbs`)
         .pipe(handlebars(templateData, options))

@@ -1,6 +1,7 @@
 {
     "name": "Eminem (Marshall Bruce Mathers III)",
-    "age": 46,
+    "age": 13,
     "city": "St. Joseph, Missouri, U.S.",
-    "ability": "rapper"
+    "ability": "rapper",
+    "strInLowerCase": "this is long sentense with all words in lower case! but i want to be upper case!"
 }
