@@ -16,13 +16,12 @@ body {
 .phone {
   &_title {
     width: 500px;
+
     @media (max-width: 500px) {
       width: auto;
     }
-    body.is_dark & {
-      color: white;
-    }
   }
+
   img {
     display: block;
   }
@@ -47,4 +46,8 @@ body {
 /* preset env example */
 :root {
   --mainColor: #12345678;
+}
+
+body {
+  color: #dd
 }
