@@ -41,7 +41,7 @@ const paths = {
   },
   templates: 'dev/templates/**/*.hbs',
   lint: {
-    scripts: ['**/*.js', '!node_modules/**/*', '!build/**/*'],
+    scripts: ['**/*.js', '!node_modules/**/*', '!build/**/*', '!gulpfile.js'],
     styles: ['**/*.css', '!node_modules/**/*', '!build/**/*'],
   },
 };
