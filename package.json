@@ -8,6 +8,9 @@
     "build": "gulp",
     "test": "gulp lint"
   },
+  "pre-push": [
+    "test"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -38,6 +41,7 @@
     "postcss-preset-env": "^6.5.0",
     "postcss-reporter": "^6.0.1",
     "postcss-short": "^5.0.0",
+    "pre-push": "^0.1.1",
     "stylelint": "^9.9.0",
     "stylelint-config-standard": "^18.2.0"
   },
