@@ -29,6 +29,8 @@ const paths = {
     dir: 'dev',
     css: 'dev/css/**/*.css',
     js: 'dev/js/**/*.js',
+    json: 'dev/data.json',
+    assets: 'dev/images/**/*',
   },
   build: {
     dir: 'build',
@@ -59,12 +61,16 @@ gulp.task('compile', () => {
         batch: files.map(item => item.slice(0, item.lastIndexOf('/'))),
         helpers: {
           // helper for capitalize every word in sentense
-          capitalizeEveryWord: str => str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+          capitalizeEveryWord: str => str
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' '),
           // helper return true if age > 18, and false if age < 18
           isOld: age => age > 18,
         },
       };
-      return gulp.src(`${paths.src.dir}/index.hbs`)
+      return gulp
+        .src(`${paths.src.dir}/index.hbs`)
         .pipe(handlebars(templateData, options))
         .pipe(rename('index.html'))
         .pipe(gulp.dest(paths.build.dir));
@@ -84,7 +90,8 @@ gulp.task('build-css', () => {
     }),
     presetEnv,
   ];
-  return gulp.src([paths.src.css])
+  return gulp
+    .src([paths.src.css])
     .pipe(sourcemaps.init())
     .pipe(postcss(plugins))
     .pipe(concat(paths.buildNames.css))
@@ -93,46 +100,66 @@ gulp.task('build-css', () => {
     .pipe(gulp.dest(paths.build.css));
 });
 
-gulp.task('build-js', () => gulp.src([paths.src.js])
+gulp.task('build-js', () => gulp
+  .src([paths.src.js])
   .pipe(sourcemaps.init())
   .pipe(concat(paths.buildNames.js))
-  .pipe(babel({
-    presets: ['@babel/env'],
-  }))
+  .pipe(
+    babel({
+      presets: ['@babel/env'],
+    }),
+  )
   .pipe(gulpif(process.env.NODE_ENV === 'production', uglify()))
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(paths.build.js)));
 
-gulp.task('clean', () => gulp.src('build', { read: false })
-  .pipe(clean()));
+gulp.task('clean', () => gulp.src('build', { read: false }).pipe(clean()));
 
-gulp.task('build', ['build-css', 'build-js']);
+gulp.task('build', ['compile', 'build-css', 'build-js']);
 
 gulp.task('server', () => {
   browserSync.init({
     server: {
-      baseDir: './',
+      baseDir: './build',
     },
   });
   gulp.watch(paths.src.css, ['css-watch']);
   gulp.watch(paths.src.js, ['js-watch']);
+  gulp.watch(paths.templates, ['compile']);
+  gulp.watch(paths.src.json).on('change', browserSync.reload);
 });
 
 gulp.task('eslint', () => {
-  gulp.src(paths.lint.scripts)
+  gulp
+    .src(paths.lint.scripts)
     .pipe(eslint(rulesJS))
     .pipe(eslint.format());
 });
 
 gulp.task('stylelint', () => {
-  gulp.src(paths.lint.styles)
-    .pipe(postcss([
+  gulp.src(paths.lint.styles).pipe(
+    postcss([
       stylelint(rulesCSS),
       reporter({
         clearAllMessages: true,
         throwError: false,
       }),
-    ]));
+    ]),
+  );
+});
+
+gulp.task('fonts', () => {
+  gulp.src('./dev/fonts/**/*').pipe(gulp.dest(`${paths.build.dir}/fonts`));
+});
+
+gulp.task('assets', () => {
+  glob(paths.src.assets, (err, files) => {
+    if (!err) {
+      gulp.src(files).pipe(gulp.dest(`${paths.build.dir}/assets`));
+    } else {
+      throw err;
+    }
+  });
 });
 
 gulp.task('lint', ['eslint', 'stylelint']);
